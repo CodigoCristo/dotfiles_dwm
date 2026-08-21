@@ -2,6 +2,10 @@
 
 Configuración personal de **dwm** (dynamic window manager) junto con las herramientas suckless (`st`, `slock`, `slstatus`) y el resto de aplicaciones que componen el entorno de escritorio.
 
+## Screenshots
+
+![https://ejemplo.com](https://github.com/CodigoCristo/dotfiles_dwm/blob/main/DWM.jpg?raw=true)
+
 ## Stack principal
 
 - **dwm** — Gestor de ventanas dinámico (suckless)
@@ -126,6 +130,4 @@ exec dwm
 └── ...          # Resto de configuraciones (gtk, etc.)
 ```
 
-## Screenshots
 
-_Agregar capturas de pantalla del escritorio aquí._
