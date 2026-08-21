@@ -4,7 +4,8 @@ Configuración personal de **dwm** (dynamic window manager) junto con las herram
 
 ## Screenshots
 
-![https://ejemplo.com](https://github.com/CodigoCristo/dotfiles_dwm/blob/main/DWM.jpg?raw=true)
+![https://github.com/CodigoCristo/dotfiles_dwm/blob/main/DWM.jpg](https://github.com/CodigoCristo/dotfiles_dwm/blob/main/DWM.jpg)
+![https://github.com/CodigoCristo/dotfiles_dwm/blob/main/DWM2.jpg](https://github.com/CodigoCristo/dotfiles_dwm/blob/main/DWM2.jpg)
 
 ## Stack principal
 
