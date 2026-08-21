@@ -123,8 +123,33 @@ for tool in "${SUCKLESS_TOOLS[@]}"; do
 done
 
 # ---------------------------------------------------------------------------
+# 6. Habilitar el servicio de ly (display manager)
+# ---------------------------------------------------------------------------
+# Según la documentación de Ly/Arch Wiki, se requieren DOS pasos:
+#   1. Habilitar ly@ttyX.service (plantilla, no "ly.service" a secas)
+#   2. Deshabilitar getty@ttyX.service en esa misma TTY, para que no compitan
+# Por defecto se usa tty2 (tty1 suele tener el getty por defecto del sistema).
+# Puedes cambiarla exportando LY_TTY antes de ejecutar el script, ej:
+#   LY_TTY=1 ./install.sh
+LY_TTY="${LY_TTY:-2}"
+
+if systemctl list-unit-files | grep -q '^ly@\.service'; then
+    info "Habilitando ly@tty${LY_TTY}.service ..."
+    sudo systemctl enable "ly@tty${LY_TTY}.service"
+
+    info "Deshabilitando getty@tty${LY_TTY}.service para evitar conflictos..."
+    sudo systemctl disable "getty@tty${LY_TTY}.service" 2>/dev/null || true
+
+    ok "ly habilitado en tty${LY_TTY} (se usará en el próximo reinicio)."
+    warn "Si usas systemd-logind con autovt@.service, revisa las notas de Ly para TTYs distintas a la default: https://codeberg.org/fairyglade/ly#systemd"
+else
+    warn "No se encontró la unidad ly@.service. Revisa que el paquete 'ly' se haya instalado correctamente."
+fi
+
+# ---------------------------------------------------------------------------
 # Fin
 # ---------------------------------------------------------------------------
 echo
 ok "¡Instalación completa!"
-info "Cierra sesión y selecciona 'dwm' en tu display manager (ly), o agrega 'exec dwm' a tu ~/.xinitrc si usas startx."
+info "Reinicia el sistema. Con ly@tty${LY_TTY} habilitado, la sesión 'dwm' aparecerá en la pantalla de login en esa TTY."
+info "Si prefieres usar startx en vez de ly, agrega 'exec dwm' a tu ~/.xinitrc y deshabilita ly con: sudo systemctl disable ly@tty${LY_TTY}.service"
